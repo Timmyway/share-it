@@ -37,7 +37,8 @@ app.post('/upload', upload.single('image'), (req, res) => {
     res.redirect('/');  
 });
 
-const PORT = 3000; // Change this port as needed
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const port = 3000; // Change this port as needed
+const host = '192.168.1.25';
+app.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
 });
