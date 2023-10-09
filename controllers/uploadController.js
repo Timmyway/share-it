@@ -13,8 +13,8 @@ exports.uploadFiles = async (req, res) => {
         for (const file of uploadedFiles) {
             console.log('==================> ', file.originalname)
             await Upload.create({
-                name: 'test',
-                filePath: 'file.path'
+                name: file.originalname,
+                filePath: file.path
             });
         }
 
