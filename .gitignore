@@ -1,3 +1,4 @@
 node_modules/
 uploads/
 gitscript.bat
+generateKey.js

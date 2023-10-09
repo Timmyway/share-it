@@ -17,7 +17,13 @@
             <h1 class="font-weight-bold display-5">Upload a file</h1>
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <div class="form-group mb-3">
-                    <input class="form-control" type="file" name="images" accept="image/*" required multiple>
+                    <input
+                        class="form-control"
+                        type="file"
+                        name="images"
+                        accept="image/*"
+                        required multiple
+                    >
                 </div>
                 <button class="btn btn-sm btn-primary" type="submit">Upload</button>
             </form>

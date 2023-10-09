@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const fs = require('fs');
+const uploadController = require('../controllers/uploadController');
+
 const multer = require('multer');
 
 // Create a storage engine for multer
@@ -19,23 +20,18 @@ router.get('/', (req, res) => {
     res.render('home');
 });
 
-router.get('/upload', (req, res) => {
-    const message = req.query.message || '';
-    const files = req.query.files ? req.query.files.split(',') : [];
-    res.render('upload', { message, files });
-});
+router.get('/upload', uploadController.renderUpload);
 
 // Handle POST request for multiple image uploads
-router.post('/upload', upload.array('images', 10), (req, res) => {    
-    if (!req.files || req.files.length === 0) {
-        res.status(400).send('No files uploaded.');
-        return;
-    }
-
-    // Successfully uploaded files
-    const uploadedFiles = req.files.map(file => file.filename);
-
-    res.redirect('/upload?message=Upload+successful&files=' + uploadedFiles.join(','));
-});
+// router.post('/upload', upload.array('images', 10), (req, res) => {
+//     if (!req.files || req.files.length === 0) {
+//         res.status(400).send('No files uploaded.');
+//         return;
+//     }
+//     // Successfully uploaded files
+//     const uploadedFiles = req.files.map(file => file.filename);
+//     res.redirect('upload');
+// });
+router.post('/upload', upload.array('images', 10), uploadController.uploadFiles);
 
 module.exports = router;
