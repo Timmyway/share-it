@@ -10,13 +10,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+		allowNull: false
       },
-      logo: {
-        type: Sequelize.STRING
+      fileUrl: {
+        type: Sequelize.STRING,		
       },
       filePath: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+		allowNull: false
       },
       createdAt: {
         allowNull: false,

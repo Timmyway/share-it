@@ -1,4 +1,5 @@
-const { Upload } = require('../config/database');
+const FileHelper = require('../helpers/FileHelper');
+const { Upload } = require('../models');
 
 exports.uploadFiles = async (req, res) => {
     if (!req.files || req.files.length === 0) {
@@ -7,14 +8,14 @@ exports.uploadFiles = async (req, res) => {
     }
 
     try {
-        const uploadedFiles = req.files;
+        const uploadedFiles = req.files;        
 
         // Save file infos to the "uploads" table
         for (const file of uploadedFiles) {
-            console.log('==================> ', file.originalname)
+            const uniqueFilename = FileHelper.sanitizeAndGenerateFilename(file.originalname);
             await Upload.create({
-                name: file.originalname,
-                logo: 'nologo',
+                name: uniqueFilename,
+                fileUrl: `${process.env.APP_URL}${process.env.UPLOAD_FOLDER || 'uploads/'}${uniqueFilename}`,
                 filePath: file.path
             });
         }
@@ -36,7 +37,7 @@ exports.renderUpload = async (req, res) => {
         const files = req.session.files ? req.session.files.split(',') : [];
 
         // Query the "uploads" table to retrieve uploaded file information        
-        const uploads = await Upload.findAll();        
+        const uploads = await Upload.findAll();
         res.render('upload', { message, files, uploads });
     } catch (error) {
         console.error('Error retrieving uploads: ', error);

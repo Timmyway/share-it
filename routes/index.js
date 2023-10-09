@@ -8,7 +8,7 @@ const multer = require('multer');
 
 // Create a storage engine for multer
 const storage = multer.diskStorage({
-    destination: 'uploads/',
+    destination: process.env.UPLOAD_FOLDER || 'uploads/',
     filename: (req, file, cb) => {        
         const uniqueFilename = FileHelper.sanitizeAndGenerateFilename(file.originalname);
         cb(null, uniqueFilename);

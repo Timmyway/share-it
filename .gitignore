@@ -3,3 +3,4 @@ uploads/
 gitscript.bat
 generateKey.js
 .env
+*.sqlite3

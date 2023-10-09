@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 const session = require('express-session');
 const ejs = require('ejs');
-const { sequelize, Upload } = require('./config/database');
+const db = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
