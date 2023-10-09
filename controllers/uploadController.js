@@ -14,6 +14,7 @@ exports.uploadFiles = async (req, res) => {
             console.log('==================> ', file.originalname)
             await Upload.create({
                 name: file.originalname,
+                logo: 'nologo',
                 filePath: file.path
             });
         }
