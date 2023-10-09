@@ -15,6 +15,9 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 

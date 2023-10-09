@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Upload</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-    <div class="container p-4">
-        <% if (message) { %>
-            <div class="success-message">
-              <%= message %>
+    <div class="max-w-4xl mx-auto p-4">
+        <% if (!message) { %>
+            <div class="bg-green-200 p-2 font-bold shadow rounded mb-4">
+              <%= message %>Mesage
             </div>
           <% } %>
-        <article>
-            <h1 class="font-weight-bold display-5">Upload a file</h1>
+        <article class="mb-4">
+            <h1 class="font-bold text-lg mb-2">Upload files</h1>
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                     <input
@@ -25,16 +26,19 @@
                         required multiple
                     >
                 </div>
-                <button class="btn btn-sm btn-primary" type="submit">Upload</button>
+                <button class="bg-blue-400 font-bold px-4 py-2 opacity-90 rounded hover:opacity-100" type="submit">Upload</button>
             </form>
         </article>        
+        
         <% if (files.length > 0) { %>
-            <h2>Uploaded Files:</h2>
-            <ul>
-              <% files.forEach(file => { %>
-                <li><%= file %></li>
-              <% }); %>
-            </ul>
+            <div class="p-2 bg-slate-100">
+                <h2 class="text-base font-bold">Uploaded Files:</h2>
+                <ul class="flex flex-col gap-2">
+                <% files.forEach(file => { %>
+                    <li class="list-none"><%= file %></li>
+                <% }); %>
+                </ul>
+            </div>
         <% } %>
     </div>
 </body>

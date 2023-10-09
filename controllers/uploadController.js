@@ -10,15 +10,15 @@ exports.uploadFiles = (req, res) => {
     // Successfully uploaded files
     const uploadedFiles = req.files.map(file => file.filename);
 
-    req.session.message = 'Upload successfully';
+    const message = 'Upload+successfully';
     req.session.files = uploadedFiles.join(',');
 
-    res.redirect('upload');
+    res.redirect('upload?message=' + message);
 };
 
 // Render the upload view with optional message and files data
 exports.renderUpload = (req, res) => {
-    const message = req.session.message || '';
+    const message = req.query.message || '';
     const files = req.session.files ? req.session.files.split(',') : [];
     res.render('upload', { message, files });
 };
