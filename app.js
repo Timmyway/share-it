@@ -1,44 +1,17 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
-const mime = require('mime-types');
-const fs = require('fs');
+const ejs = require('ejs');
 
 const app = express();
-const upload = multer({
-    dest: 'uploads/',
-    fileFilter: (req, file, cb) => {        
-        cb(null, true);
-    }
-});
+const PORT = process.env.PORT || 3000;
+const HOST = '127.0.0.1';
 
-// Serve the index.html page for image uploads
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
 
-// Handle the image upload
-app.post('/upload', upload.single('image'), (req, res) => {    
-    if (!req.file) {
-        res.status(400).send('No file uploaded.');
-        return;
-    }
+const router = require('./routes');
+app.use('/', router);
 
-    // Extract the file extension from the original filename
-    const fileExtension = path.extname(req.file.originalname);
-    console.log('Uploaded file extension:', fileExtension);
-
-    // You can use the fileExtension to rename the uploaded file or perform other operations
-    // For example, to rename the file with a unique name and original extension:
-    const uniqueFilename = `${Date.now()}${fileExtension}`;
-    const newFilePath = path.join('uploads/', uniqueFilename);
-    fs.renameSync(req.file.path, newFilePath);
-
-    res.redirect('/');  
-});
-
-const port = 3000; // Change this port as needed
-const host = '192.168.1.25';
-app.listen(port, host, () => {
-  console.log(`Server is running on http://${host}:${port}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server is running on http://${HOST}:${PORT}`);
 });
