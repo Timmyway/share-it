@@ -30,16 +30,19 @@
             </form>
         </article>        
         
-        <% if (files.length > 0) { %>
-            <div class="p-2 bg-slate-100">
-                <h2 class="text-base font-bold">Uploaded Files:</h2>
-                <ul class="flex flex-col gap-2">
-                <% files.forEach(file => { %>
-                    <li class="list-none"><%= file %></li>
-                <% }); %>
+        <section>
+            <article class="p-2 bg-slate-200 shadow-sm">
+                <h5>Uploaded files</h5>
+                <ul class="flex flex-col gap-2 items-center">
+                    <% uploads.forEach(upload => { %>
+                    <li>
+                        <strong>Filename:</strong> <%= upload.name %><br>
+                        <strong>File Path:</strong> <%= upload.filePath %>
+                    </li>
+                    <% }); %>
                 </ul>
-            </div>
-        <% } %>
+            </article>
+        </section>
     </div>
 </body>
 </html>
