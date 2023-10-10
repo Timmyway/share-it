@@ -4,3 +4,5 @@ gitscript.bat
 generateKey.js
 .env
 *.sqlite3
+public/css/
+public/uploads/

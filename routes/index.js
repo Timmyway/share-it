@@ -23,5 +23,6 @@ router.get('/', (req, res) => {
 
 router.get('/upload', uploadController.renderUpload);
 router.post('/upload', upload.array('images', 10), uploadController.uploadFiles);
+router.post('/upload/delete', uploadController.deleteFile);
 
 module.exports = router;

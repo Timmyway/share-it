@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 // Import and configure dotenv
 require('dotenv').config();
 const session = require('express-session');
@@ -18,6 +19,11 @@ app.use(session({
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
+
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// Parse application/json
+app.use(bodyParser.json());
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
