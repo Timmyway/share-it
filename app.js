@@ -7,7 +7,7 @@ const db = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const HOST = '127.0.0.1';
+const HOST = process.env.HOST;
 
 // Initialize session middleware
 app.use(session({
