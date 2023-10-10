@@ -16,6 +16,12 @@ class FileHelper
       
         return uniqueFilename;
     }
+
+    static assetUrl(originalPath)
+    {
+        const trimmedPath = originalPath.replace(/^public\//, '');
+        return trimmedPath;
+    }
 }
 
 module.exports = FileHelper;

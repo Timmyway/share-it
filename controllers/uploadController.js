@@ -11,17 +11,17 @@ exports.uploadFiles = async (req, res) => {
         const uploadedFiles = req.files;        
 
         // Save file infos to the "uploads" table
+        const assetFolder = FileHelper.assetUrl(process.env.UPLOAD_FOLDER || 'uploads/')
         for (const file of uploadedFiles) {
-            const uniqueFilename = FileHelper.sanitizeAndGenerateFilename(file.originalname);
+            const uniqueFilename = file.filename;
             await Upload.create({
                 name: uniqueFilename,
-                fileUrl: `${process.env.APP_URL}${process.env.UPLOAD_FOLDER || 'uploads/'}${uniqueFilename}`,
+                fileUrl: `${process.env.APP_URL}${assetFolder}${uniqueFilename}`,
                 filePath: file.path
             });
         }
 
-        const message = 'Upload+successfully';
-        req.session.files = uploadedFiles.map(file => file.filename).join(',');
+        const message = 'Upload+successfully';        
 
         res.redirect('upload?message=' + message);
     } catch (error) {

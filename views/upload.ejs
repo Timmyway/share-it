@@ -31,16 +31,27 @@
         </article>        
         
         <section>
-            <article class="p-2 bg-slate-200 shadow-sm">
-                <h5>Uploaded files</h5>
-                <ul class="flex flex-col gap-2 items-center">
+            <article class="py-2 px-3 bg-slate-200 shadow-sm rounded">
+                <h5 class="text-2xl font-bold mb-2">Uploaded files</h5>
+                <div class="flex flex-col gap-2">
                     <% uploads.forEach(upload => { %>
-                    <li>
-                        <strong>Filename:</strong> <%= upload.name %><br>
-                        <strong>File Path:</strong> <%= upload.filePath %>
-                    </li>
+                    <div class="bg-orange-100 max-w-xs mx-auto shadow-lg flex flex-col gap-2 rounded">
+                        <div class="h-24 flex justify-center">
+                            <img src="<%= upload.fileUrl %>" alt="<%= upload.name %>" class="h-full object-contain">
+                        </div>
+                        <div class="flex flex-col gap-2 px-3 py-2">
+                            <div>
+                                <span class="font-bold">Name: </span>
+                                <span><%= upload.name %></span>
+                            </div>
+                            <div>
+                                <span class="font-bold">Path: </span>
+                                <span><%= upload.filePath %></span>
+                            </div>
+                        </div>
+                    </div>
                     <% }); %>
-                </ul>
+                </div>
             </article>
         </section>
     </div>
