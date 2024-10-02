@@ -16,7 +16,7 @@
             </div>
           <% } %>
         <article class="mb-4">
-            <h1 class="font-bold text-lg mb-2">Upload files</h1>
+            <h1 class="font-bold text-md mb-2">Upload files</h1>
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                     <input
@@ -27,7 +27,7 @@
                         required multiple
                     >
                 </div>
-                <button class="bg-blue-400 font-bold px-4 py-2 opacity-90 rounded hover:opacity-100" type="submit">Upload</button>
+                <button class="bg-blue-600 text-white font-bold px-4 py-2 opacity-90 rounded hover:opacity-100" type="submit">Upload</button>
             </form>
         </article>        
         
@@ -37,9 +37,11 @@
                 <h5 class="text-2xl font-bold mb-2">Uploaded files</h5>
                 <div class="flex flex-col gap-2 lg:flex-row lg:flex-wrap">
                     <% uploads.forEach(upload => { %>
-                    <div class="bg-blue-100 max-w-xs mx-auto shadow-lg flex flex-col gap-2 rounded">
+                    <div class="bg-gradient-to-b from-blue-300 via-sky-100 to-indigo-400 max-w-xs mx-auto shadow-lg flex flex-col gap-2 rounded">                        
                         <div class="h-24 flex justify-center bg-slate-50">
-                            <img src="<%= upload.fileUrl %>" alt="<%= upload.name %>" class="h-full object-contain">
+                            <a href="<%= upload.fileUrl %>" target="_blank">
+                                <img src="<%= upload.fileUrl %>" alt="<%= upload.name %>" class="h-full object-contain">
+                            </a>
                         </div>
                         <div class="flex flex-col gap-2 px-3 py-2 h-full">                            
                             <div class="break-words flex flex-col">
